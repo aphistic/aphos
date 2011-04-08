@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 
 file(GLOB C_SRC
 	"boot/*.c"
-	"lib/*.c"
+	"klib/*.c"
 	"term/*.c"
 	"*.c"
 	)
