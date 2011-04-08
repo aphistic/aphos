@@ -19,27 +19,18 @@ set(APHOS_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(APHOS_MAIN_INCLUDE_DIR ${APHOS_SRC_DIR}/include)
 set(APHOS_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${APHOS_BINARY_DIR}/bin)
+
 configure_file(
 	${APHOS_MAIN_INCLUDE_DIR}/config.h.in
 	${APHOS_BINARY_DIR}/include/config.h
 	)
 
-
-add_subdirectory(boot)
 add_subdirectory(kernel)
 
-link_directories(
-	boot
-	kernel
-	)
-
-add_executable(aphOS.bin kernel/aphos.c)
-set_target_properties(aphOS.bin
-	PROPERTIES
-	COMPILE_FLAGS "-Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs -m32"
-	LINK_FLAGS "-T ${APHOS_SRC_DIR}/link/linker.ld -m32 -nostdlib -nostartfiles -nodefaultlibs"
-	)
-target_link_libraries(aphOS.bin
-	aphOS.boot
-	aphOS.kernel
-	)
+#add_executable(aphOS.bin kernel/aphos.c)
+#set_target_properties(aphOS.bin
+#	PROPERTIES
+#	COMPILE_FLAGS "-Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs -m32"
+#	LINK_FLAGS "-T ${APHOS_SRC_DIR}/link/linker.ld -m32 -nostdlib -nostartfiles -nodefaultlibs"
+#	)

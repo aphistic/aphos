@@ -1,6 +1,6 @@
 /*
 
-kernel.c - Main kernel entry point
+strlib.h - Library for working with strings.
 
 ---
 
@@ -26,30 +26,10 @@ THE SOFTWARE.
 
 */
 
-#include <multiboot.h>
-#include <strlib.h>
-#include <term.h>
+#ifndef STRLIB_H
+#define STRLIB_H
 
-void kmain(void* mbd, unsigned int magic)
-{
-	if (magic != 0x2BADB002)
-	{
-		/* Something very bad happened */
-		return;
-	}
+int strlen(char* str);
 
-	multiboot_info_t *mbi = mbd;
 
-	term_init();
-	term_cls();
-
-	term_printstr("123456789012345678901234567890123456789012345678901234567890123456789012345678901");
-
-	/*term_printchar('T');
-	term_printchar('e');
-	term_printchar('s');
-	term_printchar('t');
-	term_printchar('!');
-
-	term_printstr("test\ntest2\ttest3");*/
-}
+#endif

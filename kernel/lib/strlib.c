@@ -1,6 +1,6 @@
 /*
 
-aphos.c - Stub file used as a target for cmake's build
+strlib.c - Library for working with strings.
 
 ---
 
@@ -25,3 +25,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+#include <strlib.h>
+
+int strlen(char* str)
+{
+	int len = 0;
+
+	while (str[len] != '\0')
+	{
+		len++;
+	}
+
+	return len;
+}

@@ -1,6 +1,6 @@
 /*
 
-kernel.c - Main kernel entry point
+term.h - Terminal functionality header
 
 ---
 
@@ -26,30 +26,30 @@ THE SOFTWARE.
 
 */
 
-#include <multiboot.h>
-#include <strlib.h>
-#include <term.h>
+#ifndef TERM_H
+#define TERM_H
 
-void kmain(void* mbd, unsigned int magic)
+#define VRAM 0xb8000
+
+#define TERM_COUNT 7
+#define TERM_COLS 80
+#define TERM_ROWS 24
+
+struct terminal
 {
-	if (magic != 0x2BADB002)
-	{
-		/* Something very bad happened */
-		return;
-	}
+		int rows;
+		int cols;
+		int x;
+		int y;
+};
+typedef struct terminal terminal_t;
 
-	multiboot_info_t *mbi = mbd;
+terminal_t terms[TERM_COUNT];
+//int term_current_idx = 0;
 
-	term_init();
-	term_cls();
+void term_init();
+void term_cls();
+void term_printchar(unsigned char c);
+void term_printstr(char* msg);
 
-	term_printstr("123456789012345678901234567890123456789012345678901234567890123456789012345678901");
-
-	/*term_printchar('T');
-	term_printchar('e');
-	term_printchar('s');
-	term_printchar('t');
-	term_printchar('!');
-
-	term_printstr("test\ntest2\ttest3");*/
-}
+#endif

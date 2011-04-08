@@ -1,6 +1,6 @@
 /*
 
-kernel.c - Main kernel entry point
+term.c - Terminal functionality
 
 ---
 
@@ -26,30 +26,79 @@ THE SOFTWARE.
 
 */
 
-#include <multiboot.h>
-#include <strlib.h>
 #include <term.h>
+#include <strlib.h>
 
-void kmain(void* mbd, unsigned int magic)
+int term_current_idx = 0;
+
+void term_init()
 {
-	if (magic != 0x2BADB002)
+	int idx;
+	for (idx = 0; idx < TERM_COUNT; idx++)
 	{
-		/* Something very bad happened */
-		return;
+		terminal_t term = terms[idx];
+		term.x = 0;
+		term.y = 0;
+		term.rows = TERM_ROWS;
+		term.cols = TERM_COLS;
+	}
+}
+
+void term_cls()
+{
+	unsigned char * vram = (unsigned char *) VRAM;
+
+	int idx;
+	for (idx = 0; idx < TERM_COLS * TERM_ROWS * 2; idx++)
+	{
+		*(vram + idx) = 0;
 	}
 
-	multiboot_info_t *mbi = mbd;
+	terminal_t term = terms[term_current_idx];
+	term.x = 0;
+	term.y = 0;
+}
 
-	term_init();
-	term_cls();
+void term_printchar(unsigned char c)
+{
+	unsigned char * vram = (unsigned char *) VRAM;
 
-	term_printstr("123456789012345678901234567890123456789012345678901234567890123456789012345678901");
+	terminal_t *term = &terms[term_current_idx];
 
-	/*term_printchar('T');
-	term_printchar('e');
-	term_printchar('s');
-	term_printchar('t');
-	term_printchar('!');
+	if (c == '\n')
+	{
+		term->x = 0;
+		term->y++;
+		return;
+	}
+	else if (c == '\t')
+	{
+		term->x += 4;
+		return;
+	}
+	else
+	{
+		long offset = (term->x * 2) + (term->y * TERM_COLS * 2);
+		vram[offset] = c;
+		vram[offset + 1] = 0x07;
 
-	term_printstr("test\ntest2\ttest3");*/
+		term->x++;
+	}
+
+	if (term->x > TERM_COLS)
+	{
+		term->x = 0;
+		term->y++;
+	}
+}
+
+void term_printstr(char* msg)
+{
+	int len = strlen(msg);
+
+	int idx;
+	for (idx = 0; idx < len; idx++)
+	{
+		term_printchar(msg[idx]);
+	}
 }
