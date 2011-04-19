@@ -1,6 +1,6 @@
 /*
 
-kernel.c - Main kernel entry point
+strlib.c - Library for working with strings.
 
 ---
 
@@ -26,39 +26,41 @@ THE SOFTWARE.
 
 */
 
-#include <multiboot.h>
 #include <stdlib.h>
-#include <term.h>
 
-void kmain(void* mbd, unsigned int magic)
+int strlen(char* str)
 {
-	if (magic != 0x2BADB002)
+	int len = 0;
+
+	while (str[len] != '\0')
 	{
-		/* Something very bad happened */
-		return;
+		len++;
 	}
 
-	multiboot_info_t *mbi = mbd;
+	return len;
+}
 
-	term_init();
-	term_cls();
+void *memcpy(void *dest, const void *src, size_t count)
+{
+	char* dst8 = (char *)dest;
+	char* src8 = (char *)src;
 
-	//term_printstr("12345678901234567890123456789012345678901234567890123456789012345678901234567890a");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	//term_scrollbuffer(1);
+	while (count--)
+	{
+		*dst8++ = *src8++;
+	}
 
-	/*term_printchar('T');
-	term_printchar('e');
-	term_printchar('s');
-	term_printchar('t');
-	term_printchar('!');
+	return dest;
+}
 
-	term_printstr("test\ntest2\ttest3");*/
+void *memset(void *dest, int ch, size_t count)
+{
+	char *dst = dest;
+
+	while (count-- > 0)
+	{
+		*dst++ = ch;
+	}
+
+	return dest;
 }

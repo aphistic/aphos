@@ -1,6 +1,6 @@
 /*
 
-strlib.c - Library for working with strings.
+stddef.h - Standard type definitions
 
 ---
 
@@ -26,16 +26,9 @@ THE SOFTWARE.
 
 */
 
-#include <strlib.h>
+#ifndef STDDEF_H
+#define STDDEF_H
 
-int strlen(char* str)
-{
-	int len = 0;
+typedef unsigned int size_t;
 
-	while (str[len] != '\0')
-	{
-		len++;
-	}
-
-	return len;
-}
+#endif

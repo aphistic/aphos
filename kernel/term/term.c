@@ -27,7 +27,7 @@ THE SOFTWARE.
 */
 
 #include <term.h>
-#include <strlib.h>
+#include <stdlib.h>
 
 int term_current_idx = 0;
 
@@ -101,4 +101,11 @@ void term_printstr(char* msg)
 	{
 		term_printchar(msg[idx]);
 	}
+}
+
+void term_scrollbuffer(int lines)
+{
+	unsigned char * vram = (unsigned char *) VRAM;
+
+	memcpy(vram, vram + (TERM_COLS * 2) * lines, (TERM_COLS * 2) * (TERM_ROWS - lines));
 }

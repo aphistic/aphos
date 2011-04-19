@@ -51,5 +51,6 @@ void term_init();
 void term_cls();
 void term_printchar(unsigned char c);
 void term_printstr(char* msg);
+void term_scrollbuffer(int lines);
 
 #endif
