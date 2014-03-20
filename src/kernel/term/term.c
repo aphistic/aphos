@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 */
 
-#include <term/term.h>
+#include <term.h>
 #include <stdlib.h>
 
 int term_current_idx = 0;

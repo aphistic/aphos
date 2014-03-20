@@ -27,6 +27,8 @@ THE SOFTWARE.
 */
 
 #include <stdlib.h>
+#include <stddef.h>
+#include <term.h>
 
 int strlen(char* str)
 {
@@ -40,27 +42,32 @@ int strlen(char* str)
 	return len;
 }
 
-void *memcpy(void *dest, const void *src, size_t count)
-{
+void *memcpy(void *dest, const void *src, size_t count) {
 	char* dst8 = (char *)dest;
 	char* src8 = (char *)src;
 
-	while (count--)
-	{
+	while (count--) {
 		*dst8++ = *src8++;
 	}
 
 	return dest;
 }
 
-void *memset(void *dest, int ch, size_t count)
-{
+void *memset(void *dest, int ch, size_t count) {
 	char *dst = dest;
 
-	while (count-- > 0)
-	{
+	while (count-- > 0) {
 		*dst++ = ch;
 	}
 
 	return dest;
+}
+
+int printk(const char *fmt, ...) {
+	va_list ap;
+	va_start(ap, fmt);
+
+	term_printstr(fmt);
+
+	va_end(ap);
 }

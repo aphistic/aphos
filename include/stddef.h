@@ -31,4 +31,9 @@ THE SOFTWARE.
 
 typedef unsigned int size_t;
 
+typedef char *va_list;
+#define va_start(ap, last_arg) (ap = (va_list)(&last_arg + sizeof(last_arg)))
+#define va_arg(ap, type) (*(type *))((ap += sizeof(type) - sizeof(type)))
+#define va_end(ap)
+
 #endif

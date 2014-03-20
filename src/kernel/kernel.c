@@ -26,9 +26,9 @@ THE SOFTWARE.
 
 */
 
-#include <boot/multiboot.h>
+#include <multiboot.h>
 #include <stdlib.h>
-#include <term/term.h>
+#include <term.h>
 
 void kmain(void* mbd, unsigned int magic)
 {
@@ -43,15 +43,15 @@ void kmain(void* mbd, unsigned int magic)
 	term_init();
 	term_cls();
 
-	//term_printstr("12345678901234567890123456789012345678901234567890123456789012345678901234567890a");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
-	term_printstr("a\np\nh\no\ns\n");
+	printk("12345678901234567890123456789012345678901234567890123456789012345678901234567890a");
+	printk("a\np\nh\no\ns\n");
+	//printk("a\np\nh\no\ns\n");
+	//printk("a\np\nh\no\ns\n");
+	//printk("a\np\nh\no\ns\n");
+	//printk("a\np\nh\no\ns\n");
+	//printk("a\np\nh\no\ns\n");
+	//printk("a\np\nh\no\ns\n");
+	//printk("a\np\nh\no\ns\n");
 	//term_scrollbuffer(1);
 
 	/*term_printchar('T');

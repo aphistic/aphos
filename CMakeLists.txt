@@ -22,12 +22,13 @@ set(APHOS_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${APHOS_BINARY_DIR}/bin)
 
 configure_file(
-	${CMAKE_SOURCE_DIR}/src/kernel/config.h.in
-	${CMAKE_BINARY_DIR}/src/kernel/config.h
+	${CMAKE_SOURCE_DIR}/include/config.h.in
+	${CMAKE_BINARY_DIR}/include/config.h
 	)
 
 include_directories(
-	${CMAKE_BINARY_DIR}/src/kernel
+	${CMAKE_CURRENT_SOURCE_DIR}/include
+	${CMAKE_CURRENT_BINARY_DIR}/include
 	)
 
 add_subdirectory(src)
