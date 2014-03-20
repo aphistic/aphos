@@ -8,5 +8,5 @@ It's licensed under the MIT license, you can see a copy of it in the docs direct
 
 Thanks To
 ---
-OSDev.org - The wiki has been invaluable!
-LLVM Project - This is the resource I used to figure out how to bend cmake to my will.
+- OSDev.org - The wiki has been invaluable!
+- LLVM Project - This is the resource I used to figure out how to bend cmake to my will.

@@ -1,4 +1,4 @@
-project(APHOS C)
+project(aphos C ASM)
 cmake_minimum_required(VERSION 2.8)
 
 set(PROJECT_NAME aphOS)
@@ -22,15 +22,14 @@ set(APHOS_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${APHOS_BINARY_DIR}/bin)
 
 configure_file(
-	${APHOS_MAIN_INCLUDE_DIR}/config.h.in
-	${APHOS_BINARY_DIR}/include/config.h
+	${CMAKE_SOURCE_DIR}/src/kernel/config.h.in
+	${CMAKE_BINARY_DIR}/src/kernel/config.h
 	)
 
-add_subdirectory(kernel)
+include_directories(
+	${CMAKE_BINARY_DIR}/src/kernel
+	)
 
-#add_executable(aphOS.bin kernel/aphos.c)
-#set_target_properties(aphOS.bin
-#	PROPERTIES
-#	COMPILE_FLAGS "-Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs -m32"
-#	LINK_FLAGS "-T ${APHOS_SRC_DIR}/link/linker.ld -m32 -nostdlib -nostartfiles -nodefaultlibs"
-#	)
+add_subdirectory(src)
+
+add_custom_target(run COMMAND qemu-system-i386 -kernel ${CMAKE_CURRENT_BINARY_DIR}/bin/aphos)

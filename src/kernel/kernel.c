@@ -26,9 +26,9 @@ THE SOFTWARE.
 
 */
 
-#include <multiboot.h>
+#include <boot/multiboot.h>
 #include <stdlib.h>
-#include <term.h>
+#include <term/term.h>
 
 void kmain(void* mbd, unsigned int magic)
 {
