@@ -1,4 +1,6 @@
-project(aphos C ASM)
+set(CMAKE_SYSTEM_NAME "Generic")
+
+project(aphos)
 cmake_minimum_required(VERSION 2.8)
 
 set(PROJECT_NAME aphOS)
@@ -31,6 +33,9 @@ include_directories(
 	${CMAKE_CURRENT_BINARY_DIR}/include
 	)
 
+set(CMAKE_C_COMPILER i586-elf-gcc)
+
 add_subdirectory(src)
 
 add_custom_target(run COMMAND qemu-system-i386 -kernel ${CMAKE_CURRENT_BINARY_DIR}/bin/aphos)
+add_custom_target(debug COMMAND qemu-system-i386 -s -S -kernel ${CMAKE_CURRENT_BINARY_DIR}/bin/aphos)

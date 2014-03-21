@@ -12,7 +12,7 @@ include_directories(
 set_source_files_properties(
 	${C_SRC}
 	PROPERTIES
-	COMPILE_FLAGS "-g -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs -m32"
+	COMPILE_FLAGS "-g -gdwarf-2 -Wall -Wextra -ffreestanding -std=gnu99"
 	)
 
-add_library(kernel ${C_SRC})
+add_library(kernel STATIC ${C_SRC})
