@@ -1,7 +1,0 @@
-build
-!build/.gitkeep
-CMakeCache.txt
-CMakeFiles
-*.cmake
-Makefile
-.*.swp
