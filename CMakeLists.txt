@@ -33,8 +33,6 @@ include_directories(
 	${CMAKE_CURRENT_BINARY_DIR}/include
 	)
 
-set(CMAKE_C_COMPILER i586-elf-gcc)
-
 add_subdirectory(src)
 
 add_custom_target(run COMMAND qemu-system-i386 -kernel ${CMAKE_CURRENT_BINARY_DIR}/bin/aphos)
